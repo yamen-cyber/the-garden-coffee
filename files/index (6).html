@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garden Coffee | Nabeul</title>
+<meta name="description" content="Garden Coffee — a coffee house in Nabeul, Tunisia, rooted in the town's pottery and orange-grove heritage. Espresso, seasonal pastry, and a garden table to slow down in.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<noscript><style>.reveal{ opacity:1 !important; transform:none !important; }</style></noscript>
+
+<style>
+:root{
+  --clay:#B85C38;
+  --clay-soft:#D98554;
+  --sage:#77876B;
+  --gold:#C69749;
+  --cream:#F6EFE2;
+  --cream-2:#EFE1C9;
+  --ink:#2A1B12;
+  --ink-soft:#6B5C4E;
+  --line:rgba(42,27,18,.14);
+  --white:#FFFDF9;
+  --radius:18px;
+  --radius-sm:8px;
+  --shadow:0 20px 50px rgba(42,27,18,.12);
+  --ease:cubic-bezier(.22,.85,.32,1);
+}
+
+body.dark{
+  --cream:#1B130D;
+  --cream-2:#251A11;
+  --ink:#F3E9DA;
+  --ink-soft:#C9B8A4;
+  --line:rgba(243,233,218,.12);
+  --white:#221810;
+  --shadow:0 20px 50px rgba(0,0,0,.4);
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Inter', sans-serif;
+  font-weight:400;
+  overflow-x:hidden;
+  transition:background .5s var(--ease), color .5s var(--ease);
+}
+h1,h2,h3,h4,.display{ font-family:'Fraunces', serif; font-weight:500; letter-spacing:-0.01em; margin:0; }
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+ul{ list-style:none; margin:0; padding:0; }
+.container{ max-width:1180px; margin:0 auto; padding:0 32px; }
+section{ padding:120px 0; position:relative; }
+::selection{ background:var(--clay); color:var(--white); }
+a:focus-visible, button:focus-visible{ outline:2px solid var(--clay); outline-offset:3px; }
+@media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+
+/* ============ LOADER ============ */
+#loader{
+  position:fixed; inset:0; z-index:9999;
+  background:var(--ink);
+  display:flex; align-items:center; justify-content:center;
+  transition:opacity .6s ease, visibility .6s ease;
+}
+.coffee-loader{
+  position:relative; width:64px; height:64px;
+}
+.coffee-loader span{
+  position:absolute; inset:0;
+  border-radius:50%;
+  border:3px solid rgba(246,239,226,.15);
+  border-top-color:var(--clay-soft);
+  animation:rotate 1s linear infinite;
+}
+
+/* ============ CERAMIC DOT DIVIDER ============ */
+.dot-border{
+  display:flex; justify-content:center; align-items:center;
+  gap:16px; padding:26px 0;
+}
+.dot-border span{ width:5px; height:5px; border-radius:50%; background:var(--clay); opacity:.4; }
+.dot-border span:nth-child(3n){ background:var(--sage); opacity:.7; }
+.dot-border span:nth-child(5n){ background:var(--gold); opacity:1; width:7px; height:7px; }
+
+@keyframes rotate{ to{ transform:rotate(360deg); } }
+@keyframes fadeUp{ from{ opacity:0; transform:translateY(28px); } to{ opacity:1; transform:translateY(0); } }
+@keyframes swayBranch{ 0%,100%{ transform:rotate(-1.2deg); } 50%{ transform:rotate(1.2deg); } }
+
+/* ============ HEADER / NAV ============ */
+header{
+  position:fixed; top:0; left:0; right:0; z-index:500;
+  padding:0;
+}
+.navbar{
+  height:86px;
+  padding:0 40px;
+  display:flex; align-items:center; justify-content:space-between;
+  background:transparent;
+  transition:background .4s ease, box-shadow .4s ease, height .4s ease;
+}
+header.scrolled .navbar{
+  background:rgba(246,239,226,.88);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 8px 30px rgba(42,27,18,.08);
+  height:74px;
+  border-bottom:1px solid var(--line);
+}
+body.dark header.scrolled .navbar{ background:rgba(27,19,13,.88); }
+
+.logo{ display:flex; align-items:center; gap:12px; }
+.logo-mark{
+  width:42px; height:42px; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, var(--clay-soft), var(--clay) 70%);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--white); font-family:'Fraunces',serif; font-size:19px; font-style:italic;
+  flex-shrink:0;
+}
+.logo-text h2{ font-size:20px; line-height:1; color:var(--ink); }
+.logo-text span{ font-size:10.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--clay); }
+
+.nav-links{ display:flex; gap:34px; }
+.nav-links a{
+  font-size:13.5px; font-weight:500; letter-spacing:.02em; color:var(--ink);
+  position:relative; padding:4px 0;
+}
+.nav-links a::after{
+  content:""; position:absolute; left:0; bottom:-2px; width:0; height:1.5px;
+  background:var(--clay); transition:width .3s var(--ease);
+}
+.nav-links a:hover::after{ width:100%; }
+
+.nav-buttons{ display:flex; align-items:center; gap:16px; }
+#theme-btn{
+  width:40px; height:40px; border-radius:50%; border:1px solid var(--line);
+  background:var(--white); color:var(--ink); cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:transform .3s var(--ease), background .3s ease;
+  font-size:14px;
+}
+#theme-btn:hover{ transform:rotate(20deg); }
+.menu-toggle{ display:none; font-size:22px; background:none; border:none; color:var(--ink); cursor:pointer; }
+
+/* ============ BUTTONS ============ */
+.btn{
+  position:relative; overflow:hidden;
+  display:inline-flex; align-items:center; gap:10px;
+  padding:15px 30px; border-radius:100px;
+  font-size:13.5px; font-weight:600; letter-spacing:.03em; text-transform:uppercase;
+  background:var(--clay); color:var(--white); border:1px solid var(--clay);
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease), background .35s ease;
+  cursor:pointer;
+}
+.btn:hover{ transform:translateY(-3px); box-shadow:0 18px 34px rgba(184,92,56,.32); background:var(--clay-soft); border-color:var(--clay-soft); }
+.btn-outline{
+  background:transparent; color:var(--ink); border:1px solid var(--line);
+}
+.btn-outline:hover{ border-color:var(--clay); color:var(--clay); background:transparent; box-shadow:none; }
+.ripple{
+  position:absolute; border-radius:50%; background:rgba(255,255,255,.5);
+  transform:scale(0); animation:rippleAnim .6s ease-out; pointer-events:none;
+}
+@keyframes rippleAnim{ to{ transform:scale(3); opacity:0; } }
+
+/* ============ HERO ============ */
+.hero{
+  min-height:100svh;
+  display:flex; align-items:center;
+  position:relative; overflow:hidden;
+  padding:150px 0 90px;
+}
+.hero-bg{
+  position:absolute; inset:0;
+  background:
+    linear-gradient(180deg, rgba(26,17,11,.45), rgba(26,17,11,.78) 78%, var(--cream) 100%),
+    url('pic_8.jpg') center 35%/cover no-repeat;
+  z-index:-2;
+}
+.hero-grain{ position:absolute; inset:0; z-index:-1; background:radial-gradient(ellipse at top right, rgba(198,151,73,.18), transparent 55%); }
+.eyebrow{
+  font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold);
+  display:flex; align-items:center; gap:12px; margin:0 0 24px;
+}
+.eyebrow::before{ content:""; width:36px; height:1px; background:var(--gold); }
+.hero h1{
+  font-size:clamp(42px,7.2vw,92px);
+  line-height:1.02; color:var(--white); max-width:15ch;
+  margin:0 0 26px;
+  animation:fadeUp 1s var(--ease) .1s both;
+}
+.hero h1 em{ font-style:italic; color:var(--clay-soft); }
+.hero-sub{
+  font-size:clamp(16px,1.6vw,19px); color:#EDE3D3; max-width:46ch; line-height:1.7; margin:0 0 40px;
+  animation:fadeUp 1s var(--ease) .25s both;
+}
+.hero-buttons{ display:flex; gap:16px; flex-wrap:wrap; animation:fadeUp 1s var(--ease) .4s both; }
+
+/* ============ SECTION HEADERS ============ */
+.section-label{ font-size:12.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--clay); margin:0 0 16px; }
+.section-title{ font-size:clamp(30px,4.2vw,46px); max-width:20ch; margin:0 0 24px; }
+.lede{ font-size:16.5px; line-height:1.8; color:var(--ink-soft); max-width:58ch; }
+
+/* ============ ABOUT ============ */
+.about{ background:var(--white); }
+.about-grid{ display:grid; grid-template-columns:.9fr 1.1fr; gap:76px; align-items:center; }
+@media (max-width:860px){ .about-grid{ grid-template-columns:1fr; gap:44px; } }
+.about-figure{
+  position:relative; border-radius:var(--radius); overflow:hidden; aspect-ratio:4/5;
+  box-shadow:var(--shadow);
+}
+.about-figure img{ width:100%; height:100%; object-fit:cover; transition:transform .8s var(--ease); }
+.about-figure:hover img{ transform:scale(1.05); }
+.about-figure::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(0deg, rgba(26,17,11,.35), transparent 40%);
+}
+.about-badge{
+  position:absolute; bottom:22px; left:22px; z-index:2;
+  background:rgba(246,239,226,.92); backdrop-filter:blur(6px);
+  padding:14px 20px; border-radius:var(--radius-sm);
+  font-family:'Fraunces',serif; font-style:italic; font-size:14px; color:var(--ink);
+}
+.about-stats{ display:flex; gap:40px; margin-top:38px; flex-wrap:wrap; }
+.about-stats div{ min-width:110px; }
+.about-stats strong{ font-family:'Fraunces',serif; font-size:32px; color:var(--clay); display:block; }
+.about-stats span{ font-size:12.5px; letter-spacing:.05em; color:var(--ink-soft); text-transform:uppercase; }
+
+/* ============ MENU ============ */
+.menu{ background:var(--cream-2); }
+.menu-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; margin-bottom:56px; }
+.menu-category{ margin-bottom:50px; }
+.menu-category:last-child{ margin-bottom:0; }
+.menu-cat-title{
+  display:flex; align-items:center; gap:14px;
+  font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--sage);
+  margin:0 0 6px;
+}
+.menu-cat-title::after{ content:""; flex:1; height:1px; background:var(--line); }
+.menu-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:0 60px; }
+@media (max-width:760px){ .menu-grid{ grid-template-columns:1fr; } }
+.menu-item{
+  display:flex; justify-content:space-between; gap:20px;
+  padding:22px 0; border-bottom:1px solid var(--line);
+}
+.menu-item h4{ font-size:18px; margin:0 0 6px; }
+.menu-item p{ margin:0; font-size:13.5px; color:var(--ink-soft); line-height:1.55; max-width:32ch; }
+.menu-item .price{
+  font-family:'Fraunces',serif; font-style:italic; color:var(--clay); font-size:16px; white-space:nowrap;
+}
+.menu-feature{
+  display:grid; grid-template-columns:220px 1fr; gap:32px; align-items:center;
+  background:var(--white); border-radius:var(--radius); padding:20px; margin-bottom:32px;
+  box-shadow:var(--shadow);
+}
+.menu-feature img{ width:100%; height:150px; object-fit:cover; border-radius:var(--radius-sm); }
+.menu-feature p{ margin:0; font-size:14.5px; color:var(--ink-soft); line-height:1.7; }
+.menu-feature span.badge{
+  display:inline-block; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--clay); background:var(--cream-2); padding:5px 12px; border-radius:100px; margin-bottom:10px;
+}
+@media (max-width:600px){ .menu-feature{ grid-template-columns:1fr; } .menu-feature img{ height:200px; } }
+
+/* ============ GALLERY ============ */
+.gallery{ background:var(--white); text-align:center; }
+.gallery .section-title, .gallery .lede{ margin-left:auto; margin-right:auto; }
+.gallery-grid{
+  margin-top:56px; display:grid; grid-template-columns:repeat(5,1fr); gap:14px;
+}
+.gallery-grid a{ display:block; overflow:hidden; border-radius:var(--radius-sm); position:relative; aspect-ratio:1/1; }
+.gallery-grid a::after{ content:""; position:absolute; inset:0; background:linear-gradient(0deg, rgba(26,17,11,.45), transparent 45%); opacity:0; transition:opacity .4s ease; }
+.gallery-grid a:hover::after{ opacity:1; }
+.gallery-grid img{ width:100%; height:100%; object-fit:cover; transition:transform .7s var(--ease), filter .5s ease; }
+.gallery-grid a:hover img{ transform:scale(1.08); }
+@media (max-width:860px){ .gallery-grid{ grid-template-columns:repeat(3,1fr); } }
+@media (max-width:520px){ .gallery-grid{ grid-template-columns:repeat(2,1fr); } }
+
+/* ============ SCALLOP DIVIDER ============ */
+.scallop{ width:100%; height:26px; display:block; }
+
+/* ============ REVIEWS ============ */
+.reviews{ background:var(--cream-2); }
+.review-head{ text-align:center; max-width:640px; margin:0 auto 56px; }
+.review-container{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+@media (max-width:860px){ .review-container{ grid-template-columns:1fr; } }
+.review{
+  background:var(--white); border-radius:var(--radius); padding:34px 30px;
+  box-shadow:var(--shadow); transition:transform .4s var(--ease);
+}
+.review:hover{ transform:translateY(-6px); }
+.review .stars{ color:var(--gold); font-size:14px; letter-spacing:2px; margin-bottom:16px; }
+.review p{ font-size:15px; line-height:1.7; color:var(--ink); margin:0 0 20px; }
+.review h4{ font-size:13px; color:var(--ink-soft); font-family:'Inter',sans-serif; font-weight:600; text-transform:uppercase; letter-spacing:.05em; }
+
+/* ============ INFO TAGS ============ */
+.infos{ background:var(--white); }
+.tags-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:40px 46px; margin-top:20px; }
+@media (max-width:900px){ .tags-grid{ grid-template-columns:repeat(2,1fr); } }
+@media (max-width:520px){ .tags-grid{ grid-template-columns:1fr; } }
+.tag-group-title{ font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--clay); margin:0 0 14px; }
+.tag-list{ display:flex; flex-wrap:wrap; gap:9px; }
+.tag-list li{
+  font-size:13px; color:var(--ink); background:var(--cream-2); border:1px solid var(--line);
+  border-radius:100px; padding:7px 14px; line-height:1.3;
+}
+
+/* ============ RESERVATION BANNER ============ */
+.reservation{
+  background:linear-gradient(120deg, var(--ink) 0%, #3B2A1D 100%);
+  color:var(--cream); text-align:center; padding:100px 0;
+}
+.reservation h2{ color:var(--white); font-size:clamp(28px,4vw,42px); max-width:18ch; margin:0 auto 18px; }
+.reservation p{ color:#D9CBB8; max-width:46ch; margin:0 auto 36px; font-size:16px; line-height:1.7; }
+
+/* ============ VISIT ============ */
+.visit{ background:var(--cream-2); }
+.visit-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:70px; }
+@media (max-width:860px){ .visit-grid{ grid-template-columns:1fr; } }
+.info-row{ display:flex; gap:18px; padding:20px 0; border-top:1px solid var(--line); }
+.info-row:last-child{ border-bottom:1px solid var(--line); }
+.info-row .k{ width:110px; flex-shrink:0; font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--clay); padding-top:2px; }
+.info-row .v{ font-size:15px; color:var(--ink); line-height:1.65; }
+.info-row .v small{ display:block; color:var(--ink-soft); margin-top:3px; font-size:13px; }
+.map-card{
+  border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+  background:var(--white); box-shadow:var(--shadow);
+}
+.map-embed{ position:relative; width:100%; aspect-ratio:4/3; }
+.map-embed iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; filter:sepia(.12) saturate(1.05); }
+.map-body{ padding:26px 28px 30px; }
+.map-body h3{ font-size:19px; margin:0 0 8px; }
+.map-body p{ font-size:14px; color:var(--ink-soft); line-height:1.6; margin:0 0 18px; }
+
+/* ============ FOOTER ============ */
+footer{ background:var(--ink); color:var(--cream); padding:64px 0 32px; }
+.footer-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:40px; flex-wrap:wrap; padding-bottom:44px; border-bottom:1px solid rgba(246,239,226,.14); }
+.footer-logo{ display:flex; align-items:center; gap:12px; }
+.footer-logo h2{ color:var(--white); font-size:20px; }
+.footer-cols{ display:flex; gap:64px; flex-wrap:wrap; }
+.footer-col h5{ font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--clay-soft); margin:0 0 16px; }
+.footer-col a, .footer-col p{ display:block; font-size:14px; color:#CBBBA5; margin-bottom:10px; }
+.footer-col a:hover{ color:var(--white); }
+.socials{ display:flex; gap:12px; margin-top:6px; }
+.socials a{
+  width:38px; height:38px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  background:rgba(246,239,226,.08); transition:.35s ease;
+}
+.socials a:hover{ background:var(--clay); transform:translateY(-3px); }
+.fine{ font-size:12.5px; color:#9A8B78; margin-top:26px; text-align:center; }
+
+/* ============ REVEAL ============ */
+.reveal{ opacity:0; transform:translateY(30px); transition:opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal.active{ opacity:1; transform:translateY(0); }
+.js-fallback .reveal{ opacity:1; transform:translateY(0); }
+
+/* ============ FLOATING RESERVE ============ */
+.floating-book{
+  position:fixed; right:28px; bottom:28px; z-index:400;
+  width:58px; height:58px; border-radius:50%;
+  background:var(--clay); color:var(--white);
+  display:flex; align-items:center; justify-content:center; font-size:20px;
+  box-shadow:0 16px 34px rgba(184,92,56,.4);
+  animation:pulse 2.4s infinite;
+}
+@keyframes pulse{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.08); } }
+
+/* ============ MOBILE NAV ============ */
+@media (max-width:900px){
+  .nav-links{
+    position:fixed; top:74px; left:0; right:0; z-index:400;
+    flex-direction:column; gap:0;
+    background:var(--white); border-bottom:1px solid var(--line);
+    max-height:0; overflow:hidden; transition:max-height .4s var(--ease);
+  }
+  .nav-links.active{ max-height:400px; }
+  .nav-links a{ padding:16px 40px; border-bottom:1px solid var(--line); width:100%; }
+  .nav-links a::after{ display:none; }
+  .menu-toggle{ display:block; }
+  .navbar{ padding:0 24px; }
+}
+@media (max-width:600px){
+  section{ padding:80px 0; }
+  .container{ padding:0 22px; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="loader"><div class="coffee-loader"><span></span></div></div>
+
+<header>
+  <nav class="navbar">
+    <div class="logo">
+      <div class="logo-mark">g</div>
+      <div class="logo-text">
+        <h2>Garden Coffee</h2>
+        <span>Nabeul, Tunisia</span>
+      </div>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">Our Story</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#infos">Good to Know</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+
+    <div class="nav-buttons">
+      <button id="theme-btn" aria-label="Toggle dark mode"><i class="fa-solid fa-moon"></i></button>
+      <a href="#reservation" class="btn">Reserve</a>
+    </div>
+    <button class="menu-toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="container">
+    <p class="eyebrow">Coffee house &amp; garden · Nabeul</p>
+    <h1>Where orange blossom<br>meets the perfect <em>brew</em>.</h1>
+    <p class="hero-sub">Set among the orange trees on the edge of Nabeul's old pottery quarter, Garden Coffee pairs slow, careful espresso with the town's ceramic and citrus heritage — a place built for lingering.</p>
+    <div class="hero-buttons">
+      <a href="#menu" class="btn">View Menu</a>
+      <a href="#about" class="btn btn-outline">Discover Our Story</a>
+    </div>
+  </div>
+</section>
+
+<div class="dot-border" aria-hidden="true">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<section class="about" id="about">
+  <div class="container about-grid">
+    <div class="about-figure reveal">
+      <img src="pic_9.jpg" alt="Client dégustant un pain perdu à Garden Coffee, Nabeul">
+      <div class="about-badge">Fait maison, chaque jour</div>
+    </div>
+    <div class="reveal">
+      <p class="section-label">Our Story</p>
+      <h2 class="section-title">Rooted in Nabeul's clay and citrus</h2>
+      <p class="lede">Nabeul is a town of potters and orange groves, known for hand-painted ceramics and orange-blossom water distilled every spring. Garden Coffee draws on that heritage: a garden shaded by fruit trees, cups thrown by local artisans, and a menu that treats coffee with the same patience the town gives its clay.</p>
+      <br>
+      <p class="lede">Whether you're meeting friends, working quietly with a laptop, or simply watching the light move through the leaves, this is a place built to slow you down.</p>
+      <div class="about-stats">
+        <div><strong>2018</strong><span>Est. in Nabeul</span></div>
+        <div><strong>100%</strong><span>Beans roasted fresh</span></div>
+        <div><strong>7</strong><span>Days a week</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="container">
+    <div class="menu-head reveal">
+      <div>
+        <p class="section-label">The Menu</p>
+        <h2 class="section-title">Coffee, drinks &amp; something sweet</h2>
+      </div>
+      <p class="lede" style="max-width:36ch;">Espresso from a slow-roasted single origin, seasonal pastry, and a few house specialties worth the trip.</p>
+    </div>
+
+    <div class="reveal">
+      <div class="menu-category">
+        <p class="menu-cat-title">Salades</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div><h4>Salade César à notre façon</h4><p>Laitue, tomate cerise, poulet pané, parmesan, oeuf dur, croûtons, sauce César maison.</p></div>
+            <span class="price">18.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Salade poulet grillé</h4><p>Laitue, tomate cerise, poulet grillé, concombre rondelle.</p></div>
+            <span class="price">18.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Salade de thon</h4><p>Laitue, tomate cerise, thon, pomme de terre, oeuf dur, sauce salade.</p></div>
+            <span class="price">16.000 DT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Panini</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div><h4>Panini Jambon</h4><p>Jambon, fromage, laitue, tomate, harissa et mayonnaise maison.</p></div>
+            <span class="price">11.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Panini thon</h4><p>Thon, fromage, laitue, tomate, harissa et mayonnaise maison.</p></div>
+            <span class="price">12.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Panini Poulet</h4><p>Poulet, fromage, laitue, tomate, harissa et mayonnaise maison.</p></div>
+            <span class="price">13.000 DT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Nos Brioches</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div><h4>La brioche bacon</h4><p>Brioche salée, oeuf plat, bacon, fromage frais, sauce piquante, sauce barbecue, salade. <em>Supplément oeuf 1.000 · Supplément potatoes 3.000</em></p></div>
+            <span class="price">19.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>La brioche poulet pané</h4><p>Brioche salée, oeuf plat, poulet pané, fromage, sauce piquante, lamelles d'oignon confits, salade.</p></div>
+            <span class="price">19.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>La brioche au saumon</h4><p>Brioche salée, oeuf brouillé, saumon, avocat, fromage frais, toast tranche citron, oignon confits, sauce béarnaise, salade.</p></div>
+            <span class="price">23.000 DT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Nos Assiettes</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div><h4>L'assiette the garden</h4><p>Oeufs au choix (plats, brouillés ou omelette), poulet pané, fromage gruyère, jambon fumé, bacon et toast, oignon confit, potatoes, mini salade.</p></div>
+            <span class="price">19.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>L'assiette saumon</h4><p>Oeufs au choix (plats, brouillés ou omelette), saumon, fromage frais et toast tranche citron, oignon confits, potatoes, mini salade.</p></div>
+            <span class="price">23.000 DT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Nos Toasts Healthy</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div><h4>Toasts Healthy</h4><p>Toast fromage avocat, oeufs au choix, salade.</p></div>
+            <span class="price">15.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Toasts Healthy Saumon</h4><p>Toast fromage avocat, saumon, oeufs au choix, salade.</p></div>
+            <span class="price">19.000 DT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Le Coin Sucré · Pains Perdus (notre spécialité)</p>
+        <div class="menu-feature">
+          <img src="pic_7.jpg" alt="Pain perdu fruits rouges et pistache, notre spécialité">
+          <div>
+            <span class="badge">Notre spécialité</span>
+            <p>Fait maison, garni à la commande — crème fraîche, coulis de fruits rouges et pistache concassée sur un pain perdu doré. C'est le dessert que nos habitués reviennent chercher.</p>
+          </div>
+        </div>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div><h4>Le pain gourmand</h4><p>Nutella, caramel beurre salé maison, banane, amandes effilées. <em>Simple / Double</em></p></div>
+            <span class="price">13.000 / 16.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Le pain spéculos</h4><p>Crème spéculos, biscuit spéculos, boule de glace. <em>Simple / Double</em></p></div>
+            <span class="price">14.000 / 18.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Le pain fruits rouges</h4><p>Crème diplomate, coulis de fruits rouges, pistache concassée. <em>Simple / Double</em></p></div>
+            <span class="price">15.000 / 19.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Le pain Dubaï</h4><p>Semoule, crème mascarpone et pistache, chocolat, pistache en poudre. <em>Simple / Double</em></p></div>
+            <span class="price">17.000 / 23.000 DT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Crêpes Sucrées</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div><h4>Crêpe chocolat</h4><p>Chocolat.</p></div>
+            <span class="price">9.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Crêpe nutella</h4><p>Nutella, noisettes et écorce d'orange.</p></div>
+            <span class="price">14.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Crêpe gourmande</h4><p>Nutella, caramel beurre salé maison, banane, amandes effilées.</p></div>
+            <span class="price">15.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Crêpe Dubaï</h4><p>Semoule, crème pistache, Nutella, pistache en poudre.</p></div>
+            <span class="price">16.000 DT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Nos Rolls</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div><h4>Rolls poulet grillé</h4><p>Laitue, tomate, champignons sautés à l'ail, 3 fromages, piment mexicain, sauce piquante, sauce maison.</p></div>
+            <span class="price">14.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Rolls à la viande hachée <em>(épicé)</em></h4><p>Viande hachée, légumes sautés, 3 fromages, piment de cayenne, cornichon, sauce maison.</p></div>
+            <span class="price">16.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Rolls poulet pané</h4><p>Poulet pané, tomate, oignons caramélisés, fromage, sauce pesto, sauce maison.</p></div>
+            <span class="price">15.000 DT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Nos Crêpes <span style="font-weight:400;font-size:.55em;text-transform:none;letter-spacing:0;">(salées)</span></p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div><h4>Crêpe jambon</h4><p>Jambon de dinde, fromage râpé.</p></div>
+            <span class="price">10.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Crêpe thon</h4><p>Thon, fromage râpé, harissa et mayonnaise maison.</p></div>
+            <span class="price">12.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Crêpe viande hachée</h4><p>Viande hachée, fromage, légumes grillés, harissa et mayonnaise maison.</p></div>
+            <span class="price">14.000 DT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Le Plat</p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div><h4>Le plat escalope</h4><p>Tranche d'escalope de poulet grillé pané, frites, sauce champignons cuite au four, potatoes.</p></div>
+            <span class="price">22.000 DT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Nos Hot Coffee <span style="font-weight:400;font-size:.55em;text-transform:none;letter-spacing:0;">(Basic / Premium / Capsule)</span></p>
+        <div class="menu-grid">
+          <div class="menu-item"><div><h4>Espresso</h4></div><span class="price">5.800 / 9.800 / 7.000 DT</span></div>
+          <div class="menu-item"><div><h4>Espresso macchiato «&nbsp;capucin&nbsp;»</h4></div><span class="price">4.200 / 6.200 / 7.200 DT</span></div>
+          <div class="menu-item"><div><h4>Americano</h4></div><span class="price">6.000 / 8.000 / 7.000 DT</span></div>
+          <div class="menu-item"><div><h4>Café crème</h4></div><span class="price">4.500 / 6.500 / 7.000 DT</span></div>
+          <div class="menu-item"><div><h4>Chocolat au lait</h4></div><span class="price">6.000 / 9.000 DT</span></div>
+          <div class="menu-item"><div><h4>Café turc</h4></div><span class="price">4.500 DT</span></div>
+          <div class="menu-item"><div><h4>Chocolat chaud</h4></div><span class="price">9.000 DT</span></div>
+          <div class="menu-item"><div><h4>Cappuccino</h4></div><span class="price">9.000 DT</span></div>
+          <div class="menu-item"><div><h4>Café praliné noisette</h4></div><span class="price">Sur place</span></div>
+          <div class="menu-item"><div><h4>Café praliné pistache</h4></div><span class="price">Sur place</span></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Thé</p>
+        <div class="menu-grid">
+          <div class="menu-item"><div><h4>Thé infusion</h4></div><span class="price">5.000 DT</span></div>
+          <div class="menu-item"><div><h4>Thé à la menthe</h4></div><span class="price">5.000 DT</span></div>
+          <div class="menu-item"><div><h4>Thé amande</h4></div><span class="price">9.000 DT</span></div>
+          <div class="menu-item"><div><h4>Thé pignon</h4></div><span class="price">9.000 DT</span></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Boissons &amp; Suppléments</p>
+        <div class="menu-grid">
+          <div class="menu-item"><div><h4>Soda</h4></div><span class="price">4.000 DT</span></div>
+          <div class="menu-item"><div><h4>Eau 0.5L</h4></div><span class="price">4.000 DT</span></div>
+          <div class="menu-item"><div><h4>Eau 1L</h4></div><span class="price">6.000 DT</span></div>
+          <div class="menu-item"><div><h4>Eau gazéifiée</h4></div><span class="price">4.000 DT</span></div>
+          <div class="menu-item"><div><h4>Boisson énergétique</h4></div><span class="price">10.000 DT</span></div>
+          <div class="menu-item"><div><h4>Supplément lait</h4></div><span class="price">1.000 DT</span></div>
+          <div class="menu-item"><div><h4>Supplément noisette</h4></div><span class="price">2.000 DT</span></div>
+          <div class="menu-item"><div><h4>Supplément chantilly</h4></div><span class="price">2.000 DT</span></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Nos Cold Drinks</p>
+        <div class="menu-grid">
+          <div class="menu-item"><div><h4>Iced coffee <em>(au choix de sauce)</em></h4><p>Vanille, caramel ou iced americano.</p></div><span class="price">8.000 DT</span></div>
+          <div class="menu-item"><div><h4>Iced latte</h4><p>Chocolat ou café.</p></div><span class="price">9.000 DT</span></div>
+          <div class="menu-item"><div><h4>Iced latte pistache / noisette</h4></div><span class="price">16.000 DT</span></div>
+          <div class="menu-item"><div><h4>Matcha / Ube</h4><p>Coco ou mangue.</p></div><span class="price">12.000 DT</span></div>
+          <div class="menu-item"><div><h4>Milkshake <em>(avec chantilly)</em></h4><p>Nutella, Oréo, vanille, banane ou spéculoos.</p></div><span class="price">14.000 DT</span></div>
+          <div class="menu-item"><div><h4>Smoothie</h4><p>Chocolat ou fraise.</p></div><span class="price">12.000 DT</span></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Fresh Juice</p>
+        <div class="menu-grid">
+          <div class="menu-item"><div><h4>Citronnade</h4></div><span class="price">7.000 DT</span></div>
+          <div class="menu-item"><div><h4>Citronnade menthe</h4></div><span class="price">8.000 DT</span></div>
+          <div class="menu-item"><div><h4>Citronnade aux amandes</h4></div><span class="price">10.000 DT</span></div>
+          <div class="menu-item"><div><h4>Jus détox</h4><p>Céleri, concombre, citron, épinard.</p></div><span class="price">12.000 DT</span></div>
+          <div class="menu-item"><div><h4>Lay'gray</h4><p>Tomate, concombre, poivron, épinard.</p></div><span class="price">12.000 DT</span></div>
+          <div class="menu-item"><div><h4>Healthy citron pomme épinard</h4></div><span class="price">12.000 DT</span></div>
+          <div class="menu-item"><div><h4>Tropical ananas kiwi banane gingembre</h4></div><span class="price">12.000 DT</span></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Les Signatures</p>
+        <div class="menu-grid">
+          <div class="menu-item"><div><h4>Alligator espresso</h4></div><span class="price">10.000 DT</span></div>
+          <div class="menu-item"><div><h4>Alligator noisette</h4></div><span class="price">12.000 DT</span></div>
+          <div class="menu-item"><div><h4>Chocolat liégeois</h4></div><span class="price">12.000 DT</span></div>
+          <div class="menu-item"><div><h4>Ice tea</h4><p>Pêche ou fraise.</p></div><span class="price">12.000 DT</span></div>
+          <div class="menu-item"><div><h4>Mojito</h4><p>Menthe, fraise/pêche, bleu ou énergie.</p></div><span class="price">10.000 – 15.000 DT</span></div>
+          <div class="menu-item"><div><h4>Frappuccino</h4><p>Caramel, noisette, vanille ou Oréo.</p></div><span class="price">10.000 DT</span></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Brunch <span style="font-weight:400;font-size:.55em;text-transform:none;letter-spacing:0;">— vendredi, samedi, dimanche</span></p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div><h4>Le gourmand</h4><p>Café au choix, viennoiserie, jus du jour, mini pancakes gourmands (chocolat, banane, fruits secs) ou healthy (fruit de saison, amandes effilées), chantilly.</p></div>
+            <span class="price">12.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Le french toast</h4><p>Café au choix, viennoiserie, jus du jour, pain perdu gourmand (chocolat, banane, fruits secs) ou healthy (fruit de saison, amandes effilées), chantilly.</p></div>
+            <span class="price">16.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>La brioche bacon <em>(formule brunch)</em></h4><p>Café au choix, viennoiserie, jus du jour, brioche salée oeuf au plat, bacon, fromage frais, sauce piquante, sauce barbecue, mini salade.</p></div>
+            <span class="price">19.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>La brioche poulet pané <em>(formule brunch)</em></h4><p>Café au choix, viennoiserie, jus du jour, brioche salée oeuf au plat, poulet pané, fromage, lamelles d'oignon confit, mini salade.</p></div>
+            <span class="price">19.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>La brioche saumon <em>(formule brunch)</em></h4><p>Café au choix, viennoiserie, jus du jour, brioche salée, oeuf brouillé, saumon, avocat, concombre, fromage frais, lamelles d'oignon confit, sauce bénédicte.</p></div>
+            <span class="price">23.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Toasts Healthy <em>(formule brunch)</em></h4><p>Café au choix, viennoiserie, jus du jour, toast fromage avocat, salade.</p></div>
+            <span class="price">15.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Toasts Healthy Saumon <em>(formule brunch)</em></h4><p>Café au choix, viennoiserie, jus du jour, toast fromage avocat, saumon, salade.</p></div>
+            <span class="price">19.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>L'assiette the garden <em>(formule brunch)</em></h4><p>Café au choix, jus du jour, oeufs au choix (plats, brouillés ou omelette), poulet pané, fromage gruyère, jambon fumé, bacon et toast, oignon confit, potatoes, mini salade.</p></div>
+            <span class="price">19.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>L'assiette saumon <em>(formule brunch)</em></h4><p>Café au choix, jus du jour, oeufs au choix (plats, brouillés ou omelette), saumon, fromage frais et toast «&nbsp;tranche citron&nbsp;», oignon confit, potatoes, mini salade.</p></div>
+            <span class="price">23.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>THE GARDEN BRUNCH <em>(2 personnes)</em></h4><p>2 cafés au choix, 2 eaux minérales, 2 jus du jour, 2 plats au choix (oeufs plats, brouillés ou omelette), potatoes, mini salade.</p></div>
+            <span class="price">39.500 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Formule kids</h4><p>Chocolat au lait, mini pancakes chocolat, caramel beurre salé ou banane, chantilly, yaourt.</p></div>
+            <span class="price">10.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Le basic</h4><p>Café au choix, eau minérale, croissant.</p></div>
+            <span class="price">7.000 DT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Formules Brunch <span style="font-weight:400;font-size:.55em;text-transform:none;letter-spacing:0;">— vendredi, samedi, dimanche</span></p>
+        <div class="menu-grid">
+          <div class="menu-item"><div><h4>Formule 1</h4><p>Café, viennoiserie, jus, eau.</p></div><span class="price">9.000 DT</span></div>
+          <div class="menu-item"><div><h4>Formule 2</h4><p>Café, viennoiserie, jus, omelette ou mini crêpe ou mini pancake, fromage, eau.</p></div><span class="price">18.000 DT</span></div>
+          <div class="menu-item"><div><h4>Formule 3</h4><p>Café, viennoiserie, jus, omelette, charcuterie, fromages, toasts (beurre, confiture), mini pancake, eau.</p></div><span class="price">28.000 DT</span></div>
+          <div class="menu-item"><div><h4>Formule 4 <em>(2 personnes)</em></h4><p>2 cafés, viennoiserie, jus, omelette, charcuterie, fromages, avocat, mini pancakes (miel, fruits ou chocolat), mini gaufres, eau.</p></div><span class="price">35.000 DT</span></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Les Croffles <span style="font-weight:400;font-size:.55em;text-transform:none;letter-spacing:0;">— le croissant version waffle, notre spécialité</span></p>
+        <div class="menu-grid">
+          <div class="menu-item">
+            <div><h4>Croffle à l'italienne</h4><p>Crème mascarpone à la pistache, praliné maison, pâte à tartiner, crumble pistache.</p></div>
+            <span class="price">15.000 DT</span>
+          </div>
+          <div class="menu-item">
+            <div><h4>Croffle fruits rouges</h4><p>Crème diplomate, coulis de fraise, fraises fraîches, pistache concassée.</p></div>
+            <span class="price">15.000 DT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Nos Cookies <span style="font-weight:400;font-size:.55em;text-transform:none;letter-spacing:0;">— servis avec une boule de glace</span></p>
+        <div class="menu-grid">
+          <div class="menu-item"><div><h4>Cookies chocolat</h4></div><span class="price">12.000 DT</span></div>
+          <div class="menu-item"><div><h4>Cookies peanut butter</h4></div><span class="price">14.000 DT</span></div>
+          <div class="menu-item"><div><h4>Cookies pistache</h4></div><span class="price">16.000 DT</span></div>
+          <div class="menu-item"><div><h4>Bol granola</h4><p>Yaourt nature, granola, banane, beurre de cacahuète.</p></div><span class="price">14.000 DT</span></div>
+        </div>
+      </div>
+
+      <div class="menu-category">
+        <p class="menu-cat-title">Nos Desserts</p>
+        <div class="menu-grid">
+          <div class="menu-item"><div><h4>Brownie chocolat noir et noix</h4></div><span class="price">9.000 DT</span></div>
+          <div class="menu-item"><div><h4>Cheesecake Saint-Sébastien spéculoos</h4></div><span class="price">11.000 DT</span></div>
+          <div class="menu-item"><div><h4>Cheesecake Saint-Sébastien pistache</h4></div><span class="price">16.000 DT</span></div>
+          <div class="menu-item"><div><h4>Cheesecake Saint-Sébastien nutella</h4></div><span class="price">15.000 DT</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="scallop" viewBox="0 0 400 24" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <path d="M0,0 Q10,24 20,0 Q30,24 40,0 Q50,24 60,0 Q70,24 80,0 Q90,24 100,0 Q110,24 120,0 Q130,24 140,0 Q150,24 160,0 Q170,24 180,0 Q190,24 200,0 Q210,24 220,0 Q230,24 240,0 Q250,24 260,0 Q270,24 280,0 Q290,24 300,0 Q310,24 320,0 Q330,24 340,0 Q350,24 360,0 Q370,24 380,0 Q390,24 400,0 L400,0 L0,0 Z" fill="var(--white)"/>
+</svg>
+
+<section class="gallery" id="gallery">
+  <div class="container">
+    <p class="section-label reveal">Gallery</p>
+    <h2 class="section-title reveal">A look inside the garden</h2>
+    <div class="gallery-grid reveal">
+      <a href="#"><img src="pic_1.jpg" alt="Wrap poulet, avocat et potatoes"></a>
+      <a href="#"><img src="pic_5.jpg" alt="Assiette healthy oeufs, avocat et fromage"></a>
+      <a href="#"><img src="pic_3.jpg" alt="Poulet pané, pâtes crémeuses et coleslaw"></a>
+      <a href="#"><img src="pic_8.jpg" alt="Assiette generouse en terrasse"></a>
+      <a href="#"><img src="pic_6.jpg" alt="Pain perdu banane et caramel"></a>
+      <a href="#"><img src="pic_2.jpg" alt="Pain perdu fruits rouges et pistache"></a>
+      <a href="#"><img src="pic_4.jpg" alt="Pain perdu fruits rouges, gros plan"></a>
+      <a href="#"><img src="pic_7.jpg" alt="Pain perdu fruits rouges et pistache, vue rapprochée"></a>
+      <a href="#"><img src="pic_9.jpg" alt="Dessert dégusté en terrasse"></a>
+      <a href="#"><img src="pic_10.jpg" alt="Pain perdu prêt à déguster"></a>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="container">
+    <div class="review-head reveal">
+      <p class="section-label">Reviews</p>
+      <h2 class="section-title" style="margin-left:auto;margin-right:auto;">What guests say</h2>
+    </div>
+    <div class="review-container reveal">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>Amazing coffee and a wonderful, calm atmosphere — my favorite spot to work in the morning.</p>
+        <h4>— Regular Guest</h4>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>Best place to relax in Nabeul. The orange blossom latte is worth the visit alone.</p>
+        <h4>— Local Visitor</h4>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>Professional service, beautiful ceramics, and genuinely delicious desserts.</p>
+        <h4>— Weekend Regular</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="infos" id="infos">
+  <div class="container">
+    <div class="menu-head reveal">
+      <div>
+        <p class="section-label">Good to Know</p>
+        <h2 class="section-title">Practical information</h2>
+      </div>
+      <p class="lede" style="max-width:36ch;">Everything guests usually ask before their first visit.</p>
+    </div>
+    <div class="tags-grid reveal">
+      <div>
+        <p class="tag-group-title">Highlights</p>
+        <ul class="tag-list"><li>Great coffee</li><li>Great desserts</li><li>Wide tea selection</li></ul>
+      </div>
+      <div>
+        <p class="tag-group-title">Services</p>
+        <ul class="tag-list"><li>Takeaway</li><li>Dine-in</li><li>Table service</li></ul>
+      </div>
+      <div>
+        <p class="tag-group-title">Atmosphere</p>
+        <ul class="tag-list"><li>Relaxed</li><li>Cozy</li><li>Great for groups</li></ul>
+      </div>
+      <div>
+        <p class="tag-group-title">Payment &amp; Parking</p>
+        <ul class="tag-list"><li>Credit cards</li><li>Free street parking</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reservation" id="reservation">
+  <div class="container reveal">
+    <p class="eyebrow" style="justify-content:center;">Book a table</p>
+    <h2>Reserve your spot in the garden</h2>
+    <p>Tables fill up quickly on weekends — reserve ahead to make sure there's a seat under the orange trees waiting for you.</p>
+    <a href="#visit" class="btn">Book Now</a>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="container visit-grid">
+    <div class="reveal">
+      <p class="section-label">Find Us</p>
+      <h2 class="section-title">Visit the garden</h2>
+      <div class="info-row">
+        <span class="k">Address</span>
+        <span class="v">Nabeul, Tunisia<small>Near the pottery quarter, a short walk from the medina.</small></span>
+      </div>
+      <div class="info-row">
+        <span class="k">Hours</span>
+        <span class="v">Open daily<small>08:00 – 22:00</small></span>
+      </div>
+      <div class="info-row">
+        <span class="k">Phone</span>
+        <span class="v">+216 XX XXX XXX</span>
+      </div>
+      <div class="info-row">
+        <span class="k">Email</span>
+        <span class="v">contact@gardencoffee.tn</span>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <div class="map-card">
+        <div class="map-embed">
+          <iframe src="https://www.google.com/maps?q=Garden+Coffee+Nabeul&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Garden Coffee location on Google Maps"></iframe>
+        </div>
+        <div class="map-body">
+          <h3>A few steps from the medina</h3>
+          <p>Look for the wall of orange trees just off the market road — that's us.</p>
+          <a class="btn btn-outline" href="https://www.google.com/maps?q=Garden+Coffee+Nabeul" target="_blank" rel="noopener">Open in Google Maps →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-logo">
+        <div class="logo-mark">g</div>
+        <h2>Garden Coffee</h2>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Explore</h5>
+          <a href="#about">Our Story</a>
+          <a href="#menu">Menu</a>
+          <a href="#gallery">Gallery</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <p>Nabeul, Tunisia</p>
+          <p>contact@gardencoffee.tn</p>
+        </div>
+        <div class="footer-col">
+          <h5>Follow</h5>
+          <div class="socials">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="fine">© <span class="year">2026</span> Garden Coffee, Nabeul. All rights reserved.</p>
+  </div>
+</footer>
+
+<a href="#reservation" class="floating-book" aria-label="Reserve a table"><i class="fa-solid fa-mug-saucer"></i></a>
+
+<script>
+/* LOADER */
+window.addEventListener("load", () => {
+  const loader = document.getElementById("loader");
+  if (loader) setTimeout(() => { loader.style.opacity = "0"; loader.style.visibility = "hidden"; }, 700);
+});
+
+/* DARK MODE (session-only, no persistent storage) */
+const themeButton = document.getElementById("theme-btn");
+if (themeButton) {
+  themeButton.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
+    const icon = themeButton.querySelector("i");
+    const isDark = document.body.classList.contains("dark");
+    icon.classList.toggle("fa-moon", !isDark);
+    icon.classList.toggle("fa-sun", isDark);
+  });
+}
+
+/* NAVBAR SCROLL EFFECT */
+const header = document.querySelector("header");
+window.addEventListener("scroll", () => {
+  header.classList.toggle("scrolled", window.scrollY > 60);
+});
+
+/* MOBILE MENU */
+const menuToggle = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector(".nav-links");
+if (menuToggle) {
+  menuToggle.addEventListener("click", () => navLinks.classList.toggle("active"));
+  navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => navLinks.classList.remove("active")));
+}
+
+/* SCROLL REVEAL */
+const revealEls = document.querySelectorAll(".reveal");
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add("active"); io.unobserve(entry.target); }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+} else {
+  revealEls.forEach(el => el.classList.add("active"));
+}
+/* Safety net: if something prevents the observer from firing (e.g. a sandboxed preview), force content visible after a short delay */
+setTimeout(() => { revealEls.forEach(el => el.classList.add("active")); }, 1200);
+
+/* SMOOTH NAV */
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener("click", function (e) {
+    const target = document.querySelector(this.getAttribute("href"));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: "smooth" }); }
+  });
+});
+
+/* YEAR AUTO UPDATE */
+const yearEl = document.querySelector(".year");
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+/* BUTTON RIPPLE */
+document.querySelectorAll(".btn").forEach(button => {
+  button.addEventListener("click", function (e) {
+    const rect = this.getBoundingClientRect();
+    const ripple = document.createElement("span");
+    ripple.className = "ripple";
+    ripple.style.left = (e.clientX - rect.left) + "px";
+    ripple.style.top = (e.clientY - rect.top) + "px";
+    ripple.style.width = ripple.style.height = Math.max(rect.width, rect.height) + "px";
+    this.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 650);
+  });
+});
+</script>
+
+</body>
+</html>
